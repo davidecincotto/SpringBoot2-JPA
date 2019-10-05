@@ -1,6 +1,8 @@
 package dev.cincotto.site.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -33,6 +35,7 @@ public class Persona {
             inverseJoinColumns = {
                 @JoinColumn(name = "prodotto_id")
     })
+            @JsonManagedReference
     List<Prodotto> listaprodotti;
 }
 

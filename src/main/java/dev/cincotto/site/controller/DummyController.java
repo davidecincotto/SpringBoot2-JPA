@@ -3,6 +3,7 @@ package dev.cincotto.site.controller;
 import dev.cincotto.site.entity.Persona;
 import dev.cincotto.site.entity.Prodotto;
 import dev.cincotto.site.service.PersoneServiceImpl;
+import dev.cincotto.site.service.ProdottoServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,13 +23,19 @@ public class DummyController {
 @Autowired //da alla mia classe il riferim al service corrispondente. E' un attributo della classe. Qualcunque metodo io creo nella classe avra a disposizione ilriferimento a personaService.
     PersoneServiceImpl personeService;
 
+@Autowired
+    ProdottoServiceImpl prodottoService;
+
+
     @GetMapping("/caricadatidemo")
     public ResponseEntity caricaDati() {
 
         Random r = new Random();
         List<Prodotto> listaprodotti = new ArrayList();
         for (int i = 1; i < 10; i++) {
-            Prodotto p1 = new Prodotto(100 + 1, "Prodotto" + i, "Bel prodotto!", r.nextDouble() * 100, null);
+            Prodotto p1 = new Prodotto(null, "Prodotto" + i, "Bel prodotto!", r.nextDouble() * 100, null);
+
+            p1= prodottoService.save(p1); //passo prodotto senza chiave che viene salvato su db, e mi viene ritornato l'oggetto su db aggiornato che quindi conterrà anche la chiave sul db.
             listaprodotti.add(p1);
         }
 

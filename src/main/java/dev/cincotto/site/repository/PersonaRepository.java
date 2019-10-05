@@ -9,7 +9,6 @@ import java.util.List;
 
 
 @Repository
-@Transactional
 public interface PersonaRepository extends CrudRepository<Persona, Integer> { //dovrei implementare i metodi di crudrepository, ma userò Autoweired
 
 
