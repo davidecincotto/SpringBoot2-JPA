@@ -7,7 +7,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface ProdottoRepository extends CrudRepository<Prodotto, Integer> {
-
-
-
+ //metodi implementati in background grazie ad annotazione.
 }

@@ -17,6 +17,14 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class Persona {
+
+
+    public Persona(String nome, String cognome, List<Prodotto> listaprodotto ) {
+        this.nome = nome;
+        this.cognome=cognome;
+        this.listaprodotti=listaprodotto;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Integer id;
@@ -35,7 +43,7 @@ public class Persona {
             inverseJoinColumns = {
                 @JoinColumn(name = "prodotto_id")
     })
-            @JsonManagedReference
+            @JsonManagedReference //indica che da questa entity verso l'altra si ha la relazione principlae, che viene quindi serializzata. L'output del JSON sarà che questa classe contiene 'altra/e come figlie.
     List<Prodotto> listaprodotti;
 }
 
