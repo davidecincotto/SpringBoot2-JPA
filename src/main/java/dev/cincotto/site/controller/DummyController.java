@@ -35,7 +35,7 @@ public class DummyController {
 
         //Salvo 10 prodotti generati grazie a Random() sul DB
         for (int i = 1; i <= 10; i++) {
-            Prodotto p1 = new Prodotto( "Prodotto" + i, "Bel prodotto!", r.nextDouble() * 100, null); //id lo lascio null in quanto in prodotto ho specificato che id è gestito e assegnato in automatico, listapersone la lascio null perchè assegno dopo le persone ai prodotti.
+            Prodotto p1 = new Prodotto("Prodotto" + i, "Bel prodotto!", r.nextDouble() * 100, null); //id lo lascio null in quanto in prodotto ho specificato che id è gestito e assegnato in automatico, listapersone la lascio null perchè assegno dopo le persone ai prodotti.
 
             p1 = prodottoService.save(p1); //passo prodotto senza chiave che viene salvato su db, e mi viene ritornato l'oggetto su db aggiornato che quindi conterrà anche la chiave sul db. Per chiave intendo la chiave interna, cioè l'id.
             listaprodotti.add(p1);
@@ -49,20 +49,15 @@ public class DummyController {
                 if (r.nextBoolean()) //così se esce true aggiunge prodotto, se esce false no. Randomizzo la decisione di aggiungere o meno un prodotto quindi la lunghezza della lista
                     listarandom.add(listaprodotti.get(r.nextInt(listaprodotti.size())));
             }
-            Persona tmp = new Persona( "Nome" + i, "Cognome" + i, listarandom);
+            Persona tmp = new Persona("Nome" + i, "Cognome" + i, listarandom);
             //se l'id della persona è nullo durante la creazione verrà valorizzato secondo la strategia scelta nell'entity, che nel mio caso è autoincrement, quindi valorizza in automatico. Qui è il punto in cui creo le persone da inserire a db.
 
             personeService.save(tmp); //chiama il Service della classe persona, che ho instanziato grazie a @Autoweired.
         }
 
-
         //la response entity è un oggetto che simula il ritorno di un oggetto http. In genere torna un Header e un Body che posso personalizzare.
         return new ResponseEntity("OK", HttpStatus.OK);
     }
-
-
-
-
 
 
     @GetMapping("/caricadatidemo")
@@ -83,7 +78,7 @@ public class DummyController {
                 if (r.nextBoolean()) //così se esce true aggiunge prodotto, se esce false no. Randomizzo la decisione di aggiungere o meno un prodotto quindi la lunghezza della lista
                     listarandom.add(listaprodotti.get(r.nextInt(listaprodotti.size())));
             }
-            Persona tmp = new Persona( "Nome" + i, "Cognome" + i, listarandom);
+            Persona tmp = new Persona("Nome" + i, "Cognome" + i, listarandom);
             //se l'id della persona è nullo durante la creazione verrà valorizzato secondo la strategia scelta nell'entity, che nel mio caso è autoincrement, quindi valorizza in automatico.
 
             personeService.save(tmp);
@@ -95,3 +90,6 @@ public class DummyController {
     }
 
 }
+
+
+//TODO la volta prossima fare creazione nuovo prodotto inviando i dati da client, aggiornamento di un prodotto e cancellazione di un prodotto.

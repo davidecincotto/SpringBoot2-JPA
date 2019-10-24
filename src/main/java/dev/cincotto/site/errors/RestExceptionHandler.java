@@ -19,12 +19,12 @@ public class RestExceptionHandler {
     public ResponseEntity proottoNotFoundHandler(ProdottoNotFoundException ex){
         //new ResponseEntity(ex.getMessage(), HttpStatus.NOT_FOUND); //è errore 404
         //se non specifico body è come se La response avesse un contenuto nullo e quindi ho errore 404 da browser
-        return new CustomeResponseException( ex.getMessage(),HttpStatus.NOT_FOUND).getResponse();
+        return new CustomeResponseException( ex.getMessage(),HttpStatus.NOT_FOUND).getResponse(); //HTTP status serve per far capire al client quale è stato l'errore che ha portato la richiesta ad interruzione. In questo caso not found significa che la risorsa che è stata richiesta (il prodotto) non è stata trovata.
     }
 }
 
 
-class CustomeResponseException {
+class CustomeResponseException {  //creo una classe che mi permetta di fornire una risposta standardidzzata e completa in tutto il programma.
 
     Object data;
     LocalDateTime date;
@@ -34,15 +34,15 @@ class CustomeResponseException {
 
     public CustomeResponseException(String messaggio, HttpStatus code ){
         this(null, messaggio, code);
-    }
+    }//costruttore
 
-    public CustomeResponseException(Object data, String messaggio, HttpStatus code ){
+    public CustomeResponseException(Object data, String messaggio, HttpStatus code ){ //costruttore
 
         this.data = data;
         date = LocalDateTime.now();
         this.message = messaggio;
         this.code = code;
-        status=""+code.value();
+        status=""+code.value(); //uso "" per convertire in String il codice dell'errore numerico.
     }
 
     public ResponseEntity getResponse() { //quando converte mappa in JSON ho stringa con tutte le info e le voci della mappa.
